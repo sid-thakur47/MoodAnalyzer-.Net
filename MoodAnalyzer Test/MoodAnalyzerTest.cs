@@ -9,7 +9,7 @@ namespace MoodAnalyzer_Test
         public void given_Message_InMethod_ShouldReturnSad(){
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
             string mood = moodAnalyzer.analyzeMood("i am in sad mood");
-            Assert.AreEqual("sad", mood); 
+            Assert.AreEqual("sad", mood);  
         }
 
         [Test]
