@@ -6,29 +6,29 @@ namespace MoodAnalyzer_Test
     public class Tests
     {
         [Test]
-        public void givenMessage_WhenContainsSad_ShouldReturnSad(){
+        public void given_Message_InMethod_ShouldReturnSad(){
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string mood = moodAnalyzer.analyzeMood("sad");
+            string mood = moodAnalyzer.analyzeMood("i am in sad mood");
             Assert.AreEqual("sad", mood);
         }
 
         [Test]
         public void givenMessage_WhenContainsAnyMood_ShouldReturnHappy(){
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string mood = moodAnalyzer.analyzeMood("any");
+            string mood = moodAnalyzer.analyzeMood("i am in any mood");
             Assert.AreEqual("happy", mood);
         }
 
         [Test]
-        public void givenMessageInConstructor_WhenContainsSad_ShouldReturnSad(){
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("sad");
+        public void given_Message_InConstructor_IamInSadMood_ShouldReturnSad(){
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("i am in sad mood");
             string mood = moodAnalyzer.analyzeMood();
             Assert.AreEqual("sad", mood);
         }
 
         [Test]
-        public void givenMessageInConstructor_WhenContainsHappy_ShouldReturnHappy(){
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("happy");
+        public void givenMessage_InConstructor_WhenContainsHappy_ShouldReturnHappy(){
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("i am in happy mood");
             string mood = moodAnalyzer.analyzeMood();
             Assert.AreEqual("happy", mood);
         }
