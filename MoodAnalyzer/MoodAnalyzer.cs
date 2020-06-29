@@ -10,7 +10,7 @@ namespace MoodAnalyzer_space
         }
 
         public MoodAnalyzer(String message){
-            this.message = message; 
+            this.message = message;
         }
 
         public string analyzeMood(){
@@ -18,15 +18,19 @@ namespace MoodAnalyzer_space
         }
 
         public String analyzeMood(string message){
-            if (message.Contains("sad")) {
-                return "sad";
+            try
+            {
+                if (message.Contains("sad")){
+                    return "sad";
+                }
+                else {
+                    return "happy";
+                }
             }
-            else if (message.Contains("happy")){
+            catch (NullReferenceException e){
                 return "happy";
             }
-            else{
-                return "happy";
-            }
+
         }
     }
 }
