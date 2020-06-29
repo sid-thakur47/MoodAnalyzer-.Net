@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mood Analyzer Main", "MoodAnalyzer\Mood Analyzer Main.csproj", "{62DE8FF4-2AB0-4323-A490-939CED3C80CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodAnalyzer Main", "MoodAnalyzer\MoodAnalyzer Main.csproj", "{62DE8FF4-2AB0-4323-A490-939CED3C80CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodAnalyzer Test", "MoodAnalyzer Test\MoodAnalyzer Test.csproj", "{313E7B21-A687-4792-B5B1-B5C58FE0288F}"
 EndProject
