@@ -10,7 +10,7 @@ namespace MoodAnalyzer_space
         }
 
         public MoodAnalyzer(String message){
-            this.message = message;
+            this.message = message; 
         }
 
         public string analyzeMood(){
