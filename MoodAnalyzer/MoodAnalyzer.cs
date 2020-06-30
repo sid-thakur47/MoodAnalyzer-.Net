@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MoodAnalyzer_Main.exception;
+using System;
 
 namespace MoodAnalyzer_space
 {
@@ -6,29 +7,38 @@ namespace MoodAnalyzer_space
     {
         private String message;
 
-        public MoodAnalyzer(){
+        public MoodAnalyzer()
+        {
         }
 
-        public MoodAnalyzer(String message){
+        public MoodAnalyzer(String message)
+        {
             this.message = message;
         }
 
-        public string analyzeMood(){
+        public string analyzeMood()
+        {
             return analyzeMood(message);
         }
 
         public String analyzeMood(string message){
             try
+            { 
+                if (message.Length == 0)
             {
-                if (message.Contains("sad")){
+                throw new MoodAnalyzerException("Message Cannot ne Empty", MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION);
+            }
+            if (message.Contains("sad"))
+                {
                     return "sad";
                 }
-                else {
+                else
+                {
                     return "happy";
                 }
             }
             catch (NullReferenceException e){
-                return "happy";
+                throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL_EXCEPTION);
             }
 
         }
