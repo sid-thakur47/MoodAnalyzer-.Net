@@ -7,7 +7,7 @@ namespace MoodAnalyzers
     public class MoodAnalyzer
 
     {
-        private  String message;
+        private string message;
 
         public MoodAnalyzer()
         {

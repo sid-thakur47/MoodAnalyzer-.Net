@@ -2,7 +2,6 @@ using NUnit.Framework;
 using MoodAnalyzers;
 using MoodAnalyzer_Main.exception;
 using MoodAnalyzer_Main;
-using System;
 using System.Reflection;
 
 namespace MoodAnalyzer_Test
@@ -11,7 +10,7 @@ namespace MoodAnalyzer_Test
     {
         
         [Test]
-        public void given_Message_InMethod_ShouldReturnSad()
+        public void Given_Message_InMethod_ShouldReturnSad()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
             string mood = moodAnalyzer.AnalyzeMood("i am in sad mood");
@@ -19,7 +18,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void givenMessage_WhenContainsAnyMood_ShouldReturnHappy()
+        public void GivenMessage_WhenContainsAnyMood_ShouldReturnHappy()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
             string mood = moodAnalyzer.AnalyzeMood("i am in any mood");
@@ -27,7 +26,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void given_Message_InConstructor_IamInSadMood_ShouldReturnSad()
+        public void Given_Message_InConstructor_IamInSadMood_ShouldReturnSad()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer("i am in sad mood");
             string mood = moodAnalyzer.AnalyzeMood();
@@ -35,7 +34,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void givenMessage_InConstructor_WhenContainsHappy_ShouldReturnHappy()
+        public void Given_Message_InConstructor_WhenContainsHappy_ShouldReturnHappy()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer("i am in happy mood");
             string mood = moodAnalyzer.AnalyzeMood();
@@ -43,7 +42,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void GivenMessageInConstructor_WhenNull_ShouldThowMoodAnalysisException()
+        public void Given_MessageInConstructor_WhenNull_ShouldThowMoodAnalysisException()
         {
             try
             {
@@ -57,7 +56,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void givenMessageInConstructor_WhenEmpty_ShouldThowMoodAnalysisException()
+        public void Given_MessageInConstructor_WhenEmpty_ShouldThowMoodAnalysisException()
         {
             try
             {
@@ -71,7 +70,7 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void GivenClassName_WhenImproper_ShouldthrowException()
+        public void Given_ClassName_WhenImproper_ShouldthrowException()
         {
             try
             {
@@ -85,9 +84,8 @@ namespace MoodAnalyzer_Test
             }
         }
 
-
         [Test]
-        public void GivenConstructor_WhenImproper_ShouldthrowException()
+        public void Given_Constructor_WhenImproper_ShouldthrowException()
         {
             try
             {
@@ -102,21 +100,21 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void GivenMoodAnalyser_WhenProper_ShouldReturnObject()
+        public void Given_MoodAnalyser_WhenProper_ShouldReturnObject()
         {
-            MoodAnalyzer expected = new MoodAnalyzer("I am in happy mood");
+            MoodAnalyzer moodAnalyzerObject = new MoodAnalyzer("I am in happy mood");
             MoodAnalyzerFactory<MoodAnalyzer> moodAnalyserFactory = new MoodAnalyzerFactory<MoodAnalyzer>();
             ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
             object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor("MoodAnalyzer", constructor, "I am in happy mood");
-            Assert.AreEqual(expected, createdObject);
+            Assert.AreEqual(moodAnalyzerObject, createdObject);
         }
 
         [Test]
-        public void GivenClass_WhenImproper_ShouldThrowException()
+        public void Given_Class_WhenImproper_ShouldThrowException()
         {
             try
             {
-                MoodAnalyzer expected = new MoodAnalyzer("I am in happy mood");
+                MoodAnalyzer moodAnalyzerObject = new MoodAnalyzer("I am in happy mood");
                 MoodAnalyzerFactory<MoodAnalyzer> moodAnalyserFactory = new MoodAnalyzerFactory<MoodAnalyzer>();
                 ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
                 object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor("Mood", constructor, "I am in happy mood");
@@ -128,19 +126,20 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void GivenConstructor_WhenImproper_ShouldThrowException()
+        public void Given_Constructor_WhenImproper_ShouldThrowException()
         {
             try
             {
-                MoodAnalyzer expected = new MoodAnalyzer("I am in happy mood");
+                MoodAnalyzer moodAnalyzerObject = new MoodAnalyzer("I am in happy mood");
                 MoodAnalyzerFactory<MoodAnalyzer> moodAnalyserFactory = new MoodAnalyzerFactory<MoodAnalyzer>();
                 ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(0);
                 object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor("MoodAnalyzer", constructor, "I am in happy mood");
-                Assert.AreEqual(expected, createdObject);
+                Assert.AreEqual(moodAnalyzerObject, createdObject);
             }
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual("Method not found", e.Message);
+        
             }
         }
     }
