@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using MoodAnalyzer_space;
 using MoodAnalyzer_Main.exception;
+using MoodAnalyzer_Main;
+using System;
 
 namespace MoodAnalyzer_Test
 {
@@ -64,6 +66,43 @@ namespace MoodAnalyzer_Test
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION, e.type);
             }
+        }
+
+        [Test]
+        public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject()
+        {
+            MoodAnalyzer analyzer = new MoodAnalyzer();
+            MoodAnalyzer factoryAnalyzer = MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer_space.MoodAnalyzer","String");
+            Assert.AreEqual(analyzer, factoryAnalyzer);
+        }
+
+        [Test]
+        public void givenMoodAnalyserClass_WhenImProper_ShouldReturnClassNotFoundException()
+        {
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyser","String");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION, e.type);
+
+            }
+        }
+
+        [Test]
+        public void givenMoodAnalyserConstructor_WhenImProper_ShouldReturnMethodNotFoundException()
+        {
+            try
+            {
+                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer","Int");
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
+
+            }
+
         }
     }
 }
