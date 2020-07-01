@@ -7,33 +7,36 @@ using System.Text;
 
 namespace MoodAnalyzer_Main
 {
+
     public class MoodAnalyzerFactory
     {
-        /*  public static MoodAnalyzer CreateMoodAnalyzer()
-          {
-              Type type = typeof(MoodAnalyzer);
-              ConstructorInfo[] constructorInfo = type.GetConstructors();
-              object myObj = Activator.CreateInstance(type);
-              return (MoodAnalyzer)myObj;
-          }
-
-  */
-        //To create Object of MoodAnalyzer default constructor
-        public static MoodAnalyzer CreateMoodAnalyzer(String className,String constParameter)
-
+        private Type type = Type.GetType("MoodAnalyzer_space.MoodAnalyzer");
+        public ConstructorInfo GetConstructor()
         {
-            Type type = Type.GetType(className);
-            if (className.Equals("MoodAnalyzer_space.MoodAnalyzer"))
+            try
             {
-                object myObj = Activator.CreateInstance(type);
-                ConstructorInfo constructorInfo = type.GetConstructor(new Type[] { typeof(string) });
-                return (MoodAnalyzer)myObj;
+                ConstructorInfo[] constructors = type.GetConstructors();
+  
+                return constructors[0];
             }
-            else if (constParameter != "String")
+            catch (Exception)
+            {
+
                 throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
-            else
-                throw new MoodAnalyzerException("Class not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
+            }
         }
-         
+
+        public object CreateObjectUsingClass(string className, ConstructorInfo constructor)
+        {
+                if (className != type.Name)
+                    throw new MoodAnalyzerException("Class not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
+                if (constructor != GetConstructor())
+                    throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
+                object createdObject = Activator.CreateInstance(className, type.FullName);
+                return createdObject; 
+        }
     }
+
 }
+
+

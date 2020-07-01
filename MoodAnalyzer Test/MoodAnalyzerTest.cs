@@ -3,6 +3,7 @@ using MoodAnalyzer_space;
 using MoodAnalyzer_Main.exception;
 using MoodAnalyzer_Main;
 using System;
+using System.Reflection;
 
 namespace MoodAnalyzer_Test
 {
@@ -69,40 +70,34 @@ namespace MoodAnalyzer_Test
         }
 
         [Test]
-        public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject()
-        {
-            MoodAnalyzer analyzer = new MoodAnalyzer();
-            MoodAnalyzer factoryAnalyzer = MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer_space.MoodAnalyzer","String");
-            Assert.AreEqual(analyzer, factoryAnalyzer);
-        }
-
-        [Test]
-        public void givenMoodAnalyserClass_WhenImProper_ShouldReturnClassNotFoundException()
+        public void GivenClassName_WhenImproper_ShouldthrowException()
         {
             try
             {
-                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyser","String");
+                MoodAnalyzerFactory moodAnalyserFactory = new MoodAnalyzerFactory();
+                ConstructorInfo constInfo = moodAnalyserFactory.GetConstructor();
+                object createdObject = moodAnalyserFactory.CreateObjectUsingClass("wrong",constInfo);
             }
             catch (MoodAnalyzerException e)
             {
-                Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION, e.type);
-
+                Assert.AreEqual("Class not found", e.Message);
             }
         }
 
+    
         [Test]
-        public void givenMoodAnalyserConstructor_WhenImProper_ShouldReturnMethodNotFoundException()
+        public void GivenConstructor_WhenImproper_ShouldthrowException()
         {
             try
             {
-                MoodAnalyzerFactory.CreateMoodAnalyzer("MoodAnalyzer","Int");
+                MoodAnalyzerFactory moodAnalyserFactory = new MoodAnalyzerFactory();
+                ConstructorInfo constInfo = null;
+                object createdObject = moodAnalyserFactory.CreateObjectUsingClass("MoodAnalyzer",constInfo);
             }
             catch (MoodAnalyzerException e)
             {
-                Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION, e.type);
-
+                Assert.AreEqual("Method not found", e.Message);
             }
-
         }
     }
 }
