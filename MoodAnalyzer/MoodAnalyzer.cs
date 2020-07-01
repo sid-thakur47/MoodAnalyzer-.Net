@@ -1,7 +1,7 @@
 ﻿using MoodAnalyzer_Main.exception;
 using System;
 
-namespace MoodAnalyzer_space
+namespace MoodAnalyzers
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class MoodAnalyzer
@@ -9,27 +9,26 @@ namespace MoodAnalyzer_space
     {
         private  String message;
 
-       
         public MoodAnalyzer()
-
         {
             message = "";
         }
 
-
-
+        //parameterized constructor
         public MoodAnalyzer(String message)
         {
             this.message = message;
         }
 
         //To return the mood of the message
-        public string analyzeMood()
+        public string AnalyzeMood()
         {
             return AnalyzeMood(message);
         }
 
-        public String AnalyzeMood(string message){
+        //To return the mood of the message
+        public String AnalyzeMood(string message)
+        {
             try
             { 
                 if (message.Equals(""))

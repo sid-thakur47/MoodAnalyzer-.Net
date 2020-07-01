@@ -1,9 +1,6 @@
 ﻿using MoodAnalyzer_Main.exception;
-using MoodAnalyzer_space;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace MoodAnalyzer_Main
 {
@@ -11,29 +8,46 @@ namespace MoodAnalyzer_Main
     public class MoodAnalyzerFactory<E>
     {
         private Type type = typeof(E);
-        public ConstructorInfo GetConstructor()
+
+        // method to get constructor information  required constructor
+        public ConstructorInfo GetConstructor(int parameters )
         {
             try
             {
                 ConstructorInfo[] constructors = type.GetConstructors();
-  
+                foreach (ConstructorInfo constructor in constructors)
+                {
+                    if (constructor.GetParameters().Length == parameters)
+                        return constructor;
+                }
                 return constructors[0];
             }
             catch (Exception)
             {
-
                 throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
             }
         }
 
-        public object CreateObjectUsingClass(string className, ConstructorInfo constructor)
+        //to create object of  specified class of with default constructor
+        public object CreateObjectUsingClass(string className, ConstructorInfo constructor,int parameters)
         {
                 if (className != type.Name)
                     throw new MoodAnalyzerException("Class not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
-                if (constructor != GetConstructor())
+                if (constructor != GetConstructor(parameters))
                     throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
-                object createdObject = Activator.CreateInstance(className, type.FullName);
-                return createdObject; 
+                object returnObject = Activator.CreateInstance(Type.GetType("className"));
+                return returnObject; 
+        }
+
+        //create object of specified class with parameterized constructor
+        public object CreateObjectUsingParameterizedConstructor(string className, ConstructorInfo constructor, string mood)
+        {
+                if (className != type.Name)
+                    throw new MoodAnalyzerException("Class not found", MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND_EXCEPTION);
+                if (constructor != type.GetConstructors()[1])
+                    throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND_EXCEPTION);
+                Object returnObject = Activator.CreateInstance(type,mood);
+                return returnObject;
         }
     }
 
