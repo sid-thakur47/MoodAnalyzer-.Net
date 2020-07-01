@@ -13,7 +13,7 @@ namespace MoodAnalyzer_Test
         public void given_Message_InMethod_ShouldReturnSad()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string mood = moodAnalyzer.analyzeMood("i am in sad mood");
+            string mood = moodAnalyzer.AnalyzeMood("i am in sad mood");
             Assert.AreEqual("sad", mood);
         }
 
@@ -21,7 +21,7 @@ namespace MoodAnalyzer_Test
         public void givenMessage_WhenContainsAnyMood_ShouldReturnHappy()
         {
             MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            string mood = moodAnalyzer.analyzeMood("i am in any mood");
+            string mood = moodAnalyzer.AnalyzeMood("i am in any mood");
             Assert.AreEqual("happy", mood);
         }
 
@@ -74,7 +74,7 @@ namespace MoodAnalyzer_Test
         {
             try
             {
-                MoodAnalyzerFactory moodAnalyserFactory = new MoodAnalyzerFactory();
+                MoodAnalyzerFactory<MoodAnalyzer> moodAnalyserFactory = new MoodAnalyzerFactory<MoodAnalyzer>();
                 ConstructorInfo constInfo = moodAnalyserFactory.GetConstructor();
                 object createdObject = moodAnalyserFactory.CreateObjectUsingClass("wrong",constInfo);
             }
@@ -90,7 +90,7 @@ namespace MoodAnalyzer_Test
         {
             try
             {
-                MoodAnalyzerFactory moodAnalyserFactory = new MoodAnalyzerFactory();
+                MoodAnalyzerFactory <MoodAnalyzer>moodAnalyserFactory = new MoodAnalyzerFactory<MoodAnalyzer>();
                 ConstructorInfo constInfo = null;
                 object createdObject = moodAnalyserFactory.CreateObjectUsingClass("MoodAnalyzer",constInfo);
             }

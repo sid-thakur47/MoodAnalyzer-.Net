@@ -7,7 +7,7 @@ namespace MoodAnalyzer_space
     public class MoodAnalyzer
 
     {
-        private String message;
+        private  String message;
 
        
         public MoodAnalyzer()
@@ -26,10 +26,10 @@ namespace MoodAnalyzer_space
         //To return the mood of the message
         public string analyzeMood()
         {
-            return analyzeMood(message);
+            return AnalyzeMood(message);
         }
 
-        public String analyzeMood(string message){
+        public String AnalyzeMood(string message){
             try
             { 
                 if (message.Equals(""))

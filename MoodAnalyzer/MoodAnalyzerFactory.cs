@@ -8,9 +8,9 @@ using System.Text;
 namespace MoodAnalyzer_Main
 {
 
-    public class MoodAnalyzerFactory
+    public class MoodAnalyzerFactory<E>
     {
-        private Type type = Type.GetType("MoodAnalyzer_space.MoodAnalyzer");
+        private Type type = typeof(E);
         public ConstructorInfo GetConstructor()
         {
             try
