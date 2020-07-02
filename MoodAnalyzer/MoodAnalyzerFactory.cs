@@ -57,8 +57,24 @@ namespace MoodAnalyzer_Main
             object returnObject = Activator.CreateInstance(type, mood);
             return returnObject;
         }
+
+        ////invoke mood analyzer methods
+        public string InvokeMoodAnalyser(String methodName, String mood)
+        {
+            try
+            {
+                MethodInfo instanceMethod = type.GetMethod(methodName, new Type[] { typeof(string) });
+                object objectInstance = Activator.CreateInstance(type, mood);
+                return (string)instanceMethod.Invoke(objectInstance, new Object[] { mood });
+            }
+            catch (NullReferenceException )
+            {
+                throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND);
+            }
+        } 
     }
 }
+
 
     
 
