@@ -9,7 +9,7 @@ namespace MoodAnalyzer_Main
     {
         private Type type = typeof(E);
 
-       //// method to get constructor information  required constructor
+        //// method to get constructor information  required constructor
         public ConstructorInfo GetConstructor(int parameters)
         {
             try
@@ -57,16 +57,10 @@ namespace MoodAnalyzer_Main
             object returnObject = Activator.CreateInstance(type, mood);
             return returnObject;
         }
-
-
-        public string InvokeMethod(string methodName, string mood)
-        {
-            object testInstance = Activator.CreateInstance(type, mood);
-            MethodInfo toInvoke = type.GetMethod(methodName);
-            return (string)toInvoke.Invoke(testInstance, null);
-        }
-
     }
 }
+
+    
+
 
 

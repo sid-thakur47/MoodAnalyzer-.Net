@@ -141,12 +141,5 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND, e.ExceptionTypes);
             }
         }
-
-        [Test]
-        public void GivenHappyMessageInReflection_WhenProper_Should_ReturnHappy()
-        {
-            string mood = moodAnalyserFactory.InvokeMethod("AnalyzeMood", "im in happy mood");
-            Assert.AreSame("happy", mood);
-        }
     }
 }
