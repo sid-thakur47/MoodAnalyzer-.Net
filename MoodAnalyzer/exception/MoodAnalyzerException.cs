@@ -1,21 +1,27 @@
 ﻿using System;
 
-
-namespace MoodAnalyzer_Main.exception
+namespace MoodAnalyzerExceptions
 {
-    public class MoodAnalyzerException :Exception
-
+    /// <summary>
+    /// /To Throws Custom MoodAnalyzer Exception
+    /// </summary>
+    public class MoodAnalyzerException : Exception
 {
+        public ExceptionType ExceptionTypes;
+
+        //// Initlialization
+        public MoodAnalyzerException(string message, ExceptionType type) 
+        : base(message)
+        {
+            this.ExceptionTypes = type;
+        }
+
+        ////Types of exception
         public enum ExceptionType
         {
-            NULL_EXCEPTION, EMPTY_EXCEPTION,
-            CLASS_NOT_FOUND_EXCEPTION,
-            METHOD_NOT_FOUND_EXCEPTION
-        }
-        public ExceptionType type;
-        public MoodAnalyzerException(String message, ExceptionType type) : base(message)
-        {
-            this.type = type;
+            NULL, EMPTY,
+            CLASS_NOT_FOUND,
+            METHOD_NOT_FOUND
         }
     }
 }

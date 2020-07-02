@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace  MoodAnalyzers
+namespace MoodAnalyzers
 
 {
-  class Program
+  public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("Welocome to MoodAnalyzer!");
         }

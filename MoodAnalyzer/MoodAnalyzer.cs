@@ -1,5 +1,5 @@
-﻿using MoodAnalyzer_Main.exception;
-using System;
+﻿using System;
+using MoodAnalyzerExceptions;
 
 namespace MoodAnalyzers
 {
@@ -8,32 +8,33 @@ namespace MoodAnalyzers
 
     {
         private string message;
-
+        ////Constructor without parameter
+      
         public MoodAnalyzer()
         {
-            message = "";
+            this.message = string.Empty;
         }
 
-        //parameterized constructor
-        public MoodAnalyzer(String message)
+        ////parameterized constructor
+        public MoodAnalyzer(string message)
         {
             this.message = message;
         }
 
-        //To return the mood of the message
+        ////To return the mood of the message
         public string AnalyzeMood()
         {
             return AnalyzeMood(message);
         }
 
-        //To return the mood of the message
-        public String AnalyzeMood(string message)
+        ////To return the mood of the message
+        public string AnalyzeMood(string message)
         {
             try
             { 
-                if (message.Equals(""))
+                if (message.Equals(string.Empty))
             {
-                throw new MoodAnalyzerException("Message Cannot ne Empty", MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION);
+                throw new MoodAnalyzerException("Message Cannot be Empty", MoodAnalyzerException.ExceptionType.EMPTY);
             }
             if (message.Contains("sad"))
                 {
@@ -44,15 +45,16 @@ namespace MoodAnalyzers
                     return "happy";
                 }
             }
-            catch (NullReferenceException ){
-                throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL_EXCEPTION);
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL);
             }
 
         }
 
-        //To check if two objects are equal
+        ////To check if two objects are equal
         override
-      public bool Equals(Object that)
+      public bool Equals(object that)
         {
             MoodAnalyzer moodAnalyser = (MoodAnalyzer)that;
             if (this.message.Equals(moodAnalyser.message))
