@@ -1,33 +1,56 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MoodAnalyzer.cs" company="BridgeLabz">
+// Copyright (c) 2012 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using MoodAnalyzerExceptions;
 
 namespace MoodAnalyzers
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+    /// <summary>
+    /// Analyze the mood
+    /// </summary>
     public class MoodAnalyzer
-
     {
+        /// <summary>
+        /// Mood Message
+        /// </summary>
         private string message;
-        ////Constructor without parameter
-      
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoodAnalyzer"/> class
+        /// </summary>
         public MoodAnalyzer()
         {
             this.message = string.Empty;
         }
 
-        ////parameterized constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoodAnalyzer"/> class
+        /// </summary>
+        /// <param name="message">Mood of person</param>
         public MoodAnalyzer(string message)
         {
             this.message = message;
         }
 
-        ////To return the mood of the message
+        /// <summary>
+        /// analyze the mood of the message
+        /// </summary>
+        /// <returns> analyzed mood</returns>
         public string AnalyzeMood()
         {
-            return AnalyzeMood(message);
+            return this.AnalyzeMood(this.message);
         }
 
-        ////To return the mood of the message
+        /// <summary>
+        /// To return the mood of the message
+        /// </summary>
+        /// <param name="message">Mood of person</param>
+        /// <returns>analyzed mood</returns>
         public string AnalyzeMood(string message)
         {
             try
@@ -36,6 +59,7 @@ namespace MoodAnalyzers
             {
                 throw new MoodAnalyzerException("Message Cannot be Empty", MoodAnalyzerException.ExceptionType.EMPTY);
             }
+
             if (message.Contains("sad"))
                 {
                     return "sad";
@@ -49,10 +73,13 @@ namespace MoodAnalyzers
             {
                 throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL);
             }
+                    }
 
-        }
-
-        ////To check if two objects are equal
+        /// <summary>
+        /// To check if two objects are equal
+        /// </summary>
+        /// <param name="that">Object for equality</param>
+        /// <returns>true or false</returns>
         override
       public bool Equals(object that)
         {
@@ -61,6 +88,7 @@ namespace MoodAnalyzers
             {
                 return true;
             }
+
             return false;
         }
     }

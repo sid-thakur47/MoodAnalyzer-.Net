@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MoodAnalyzerException.cs" company="BridgeLabz">
+// Copyright (c) 2012 All Rights Reserved
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 
 namespace MoodAnalyzerExceptions
 {
@@ -6,21 +11,46 @@ namespace MoodAnalyzerExceptions
     /// /To Throws Custom MoodAnalyzer Exception
     /// </summary>
     public class MoodAnalyzerException : Exception
-{
+    {
+        /// <summary>
+        /// Exception type
+        /// </summary>
         public ExceptionType ExceptionTypes;
 
-        //// Initlialization
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoodAnalyzerException"/> class
+        /// </summary>
+        /// <param name="message"> Exception message </param>
+        /// <param name="type"> type of exception</param>
         public MoodAnalyzerException(string message, ExceptionType type) 
         : base(message)
         {
             this.ExceptionTypes = type;
         }
 
-        ////Types of exception
+        /// <summary>
+        ///  Types of exception
+        /// </summary>
         public enum ExceptionType
         {
-            NULL, EMPTY,
+            /// <summary>
+            /// For null reference exception
+            /// </summary>
+            NULL,
+
+            /// <summary>
+            /// For null Empty field exception
+            /// </summary>
+            EMPTY,
+
+            /// <summary>
+            /// For null class not found exception
+            /// </summary>
             CLASS_NOT_FOUND,
+
+            /// <summary>
+            /// For method not found exception
+            /// </summary>
             METHOD_NOT_FOUND
         }
     }
