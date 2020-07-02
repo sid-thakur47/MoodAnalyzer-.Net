@@ -3,7 +3,6 @@ using MoodAnalyzerExceptions;
 using MoodAnalyzers;
 using NUnit.Framework;
 using MoodAnalyzer_Main;
-using System.Reflection.Metadata;
 
 namespace MoodAnalyzerTest
 {
@@ -56,6 +55,7 @@ namespace MoodAnalyzerTest
             {
                 MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
                 string mood = moodAnalyzer.AnalyzeMood();
+                Assert.AreEqual(HAPPY, mood);
             }
             catch (MoodAnalyzerException e)
             {
@@ -70,6 +70,7 @@ namespace MoodAnalyzerTest
             {
                 MoodAnalyzer moodAnalyzer = new MoodAnalyzer(string.Empty);
                 string mood = moodAnalyzer.AnalyzeMood();
+                Assert.AreEqual(HAPPY, mood);
             }
             catch (MoodAnalyzerException e)
             {
@@ -84,6 +85,7 @@ namespace MoodAnalyzerTest
             {
                 ConstructorInfo constInfo = moodAnalyserFactory.GetConstructor(1);
                 object createdObject = moodAnalyserFactory.CreateObjectUsingClass("wrong", constInfo, 1);
+                Assert.AreEqual(happyAnalyzer, createdObject);
             }
             catch (MoodAnalyzerException e)
             {
@@ -98,6 +100,7 @@ namespace MoodAnalyzerTest
             {
                 ConstructorInfo constInfo = null;
                 object createdObject = moodAnalyserFactory.CreateObjectUsingClass("MoodAnalyzer", constInfo, 1);
+                Assert.AreEqual(happyAnalyzer, createdObject);
             }
             catch (MoodAnalyzerException e)
             {
@@ -120,6 +123,7 @@ namespace MoodAnalyzerTest
             {
                 ConstructorInfo constructor = moodAnalyserFactory.GetConstructor(1);
                 object createdObject = moodAnalyserFactory.CreateObjectUsingParameterizedConstructor("Mood", constructor, "i am in happy mood");
+                Assert.AreEqual(happyAnalyzer, createdObject);
             }
             catch (MoodAnalyzerException e)
             {
@@ -155,6 +159,7 @@ namespace MoodAnalyzerTest
             try
             {
                 string actual = moodAnalyserFactory.InvokeMoodAnalyser("wrongMethod", "im in happy mood");
+                Assert.AreEqual(HAPPY, actual);
             }
             catch (MoodAnalyzerException e)
             {

@@ -63,9 +63,9 @@ namespace MoodAnalyzer_Main
         {
             try
             {
-                MethodInfo instanceMethod = type.GetMethod(methodName, new Type[] { typeof(string) });
-                object objectInstance = Activator.CreateInstance(type, mood);
-                return (string)instanceMethod.Invoke(objectInstance, new Object[] { mood });
+                MethodInfo info = type.GetMethod(methodName, new Type[] { typeof(string) });
+                object instance = Activator.CreateInstance(type, mood);
+                return (string)info.Invoke(instance, new String[] { mood });
             }
             catch (NullReferenceException )
             {
