@@ -123,6 +123,24 @@ using NUnit.Framework;
         }
 
         /// <summary>
+        /// Test Case 4.1:If correct mood should return 
+        /// </summary>object
+        [Test]
+        public void Given_ClassName_Whenproper_ShouldthrowException()
+        {
+            try
+            {
+                ConstructorInfo constInfo = this.moodAnalyserFactory.GetConstructor(1);
+                object createdObject = this.moodAnalyserFactory.CreateObject("MoodAnalyzer", constInfo, "happy", 1);
+                Assert.IsInstanceOf(typeof(MoodAnalyzer), createdObject);
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, e.ExceptionTypes);
+            }
+        }
+
+        /// <summary>
         /// Test Case 4.2:If incorrect class name should throw exception
         /// </summary>
         [Test]
@@ -256,6 +274,22 @@ using NUnit.Framework;
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.FIELD_NOT_FOUND, e.ExceptionTypes);
+            }
+        }
+        /// <summary>
+        /// Test Case 7.3:Incorrect field returns exception
+        /// </summary>
+        [Test]
+        public void GivenFieldInReflection_WhenNull_FieldName_Should_ReturnException()
+        {
+            try
+            {
+                string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", null);
+                Assert.AreEqual(HAPPY, actual);
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.NULL_FIELD, e.ExceptionTypes);
             }
         }
     }

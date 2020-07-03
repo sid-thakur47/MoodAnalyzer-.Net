@@ -79,9 +79,14 @@ using MoodAnalyzerExceptions;
         /// <returns>mood analyzed by invoked method</returns>
         public string InvokeMood(string methodName, string mood, string field)
         {
+            if (field == null)
+            {
+                throw new MoodAnalyzerException("Field cannot be null", MoodAnalyzerException.ExceptionType.NULL_FIELD);
+            }
+
             try
             {
-                FieldInfo fields = type.GetField(field);
+                FieldInfo fields = this.type.GetField(field);
                 string value = fields.ToString();
                 if (value.Contains("String message"))
                 {

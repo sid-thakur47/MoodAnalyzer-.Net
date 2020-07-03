@@ -56,7 +56,12 @@ namespace MoodAnalyzerExceptions
             /// <summary>
             /// For field not found exception
             /// </summary>
-            FIELD_NOT_FOUND
+            FIELD_NOT_FOUND,
+
+            /// <summary>
+            /// For not field
+            /// </summary>
+            NULL_FIELD
         }
     }
 }
