@@ -1,15 +1,14 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MoodAnalyzerFactory.cs" company="BridgeLabz">
-// Copyright (c) 2012 All Rights Reserved
+// Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-
+namespace MoodAnalyzer_Main
+{
 using System;
 using System.Reflection;
 using MoodAnalyzerExceptions;
 
-namespace MoodAnalyzer_Main
-{
     /// <summary>
     /// Creating Object of specific Type
     /// </summary>
@@ -22,7 +21,7 @@ namespace MoodAnalyzer_Main
         private Type type = typeof(E);
 
         /// <summary>
-        ///  method to get constructor information  required constructor
+        /// method to get constructor information of required constructor
         /// </summary>
         /// <param name="parameters">constructor parameters</param>
         /// <returns>Constructor info</returns>
@@ -33,8 +32,8 @@ namespace MoodAnalyzer_Main
                 ConstructorInfo[] constructors = this.type.GetConstructors();
                 foreach (ConstructorInfo constructor in constructors)
                 {
-                    if (constructor.GetParameters().Length == parameters) 
-                    { 
+                    if (constructor.GetParameters().Length == parameters)
+                    {
                         return constructor;
                     }
                 }
@@ -43,7 +42,7 @@ namespace MoodAnalyzer_Main
             }
             catch (Exception)
             {
-              throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND);
+                throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND);
             }
         }
 
@@ -75,20 +74,35 @@ namespace MoodAnalyzer_Main
         /// invoke mood analyzer methods
         /// </summary>
         /// <param name="methodName">method to be invoked</param>
-        /// <param name="mood">mood to be analyzed</param>
+        /// <param name="mood">field of mood analyzer</param>
+        /// <param name="field">mood to be analyzed</param>
         /// <returns>mood analyzed by invoked method</returns>
-        public string InvokeMoodAnalyser(string methodName, string mood)
+        public string InvokeMood(string methodName, string mood, string field)
         {
             try
             {
-                MethodInfo info = this.type.GetMethod(methodName, new Type[] { typeof(string) });
-                object instance = Activator.CreateInstance(this.type, mood);
-                return (string)info.Invoke(instance, new string[] { mood });
+                FieldInfo fields = type.GetField(field);
+                string value = fields.ToString();
+                if (value.Contains("String message"))
+                {
+                    try
+                    {
+                        MethodInfo info = this.type.GetMethod(methodName, new Type[] { typeof(string) });
+                        object instance = Activator.CreateInstance(this.type);
+                        return (string)info.Invoke(instance, new string[] { mood });
+                    }
+                    catch (NullReferenceException)
+                    {
+                        throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND);
+                    }
+                }
             }
             catch (NullReferenceException)
             {
-                throw new MoodAnalyzerException("Method not found", MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND);
+                throw new MoodAnalyzerException("Field not found", MoodAnalyzerException.ExceptionType.FIELD_NOT_FOUND);
             }
-        } 
+
+            return null;
+        }
     }
 }

@@ -1,16 +1,16 @@
 //-----------------------------------------------------------------------
 // <copyright file="MoodAnalyzerTest.cs" company="BridgeLabz">
-// Copyright (c) 2012 All Rights Reserved
+// Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
+namespace MoodAnalyzerTest
+{
 using System.Reflection;
 using MoodAnalyzer_Main;
 using MoodAnalyzerExceptions;
 using MoodAnalyzers;
 using NUnit.Framework;
 
-namespace MoodAnalyzerTest
-{
     /// <summary>
     /// Test for Mood Analyzer
     /// </summary>
@@ -49,7 +49,6 @@ namespace MoodAnalyzerTest
         /// <summary>
         /// Test Case 1.1 : Given i'm in sad mood should return sad
         /// </summary>
-      
         [Test]
         public void Given_Message_InMethod_ShouldReturnSad()
         {
@@ -212,7 +211,7 @@ namespace MoodAnalyzerTest
         [Test]
         public void GivenHappyMessageInReflection_WhenProper_Should_ReturnHappy()
         {
-            string actual = this.moodAnalyserFactory.InvokeMoodAnalyser("AnalyzeMood", "im in happy mood");
+            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "message");
             Assert.AreEqual(HAPPY, actual);
         }
 
@@ -224,12 +223,39 @@ namespace MoodAnalyzerTest
         {
             try
             {
-                string actual = this.moodAnalyserFactory.InvokeMoodAnalyser("wrongMethod", "im in happy mood");
+                string actual = this.moodAnalyserFactory.InvokeMood("wrongMethod", "im in happy mood", "message");
                 Assert.AreEqual(HAPPY, actual);
             }
             catch (MoodAnalyzerException e)
             {
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.METHOD_NOT_FOUND, e.ExceptionTypes);
+            }
+        }
+
+        /// <summary>
+        /// Test Case 7.1:Happy message in reflection  with correct field returns happy
+        /// </summary>
+        [Test]
+        public void SetHappyMessageInReflection_WhenProper_Should_ReturnHappy()
+        {
+            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "message");
+            Assert.AreEqual(HAPPY, actual);
+        }
+
+        /// <summary>
+        /// Test Case 7.2:Incorrect field returns exception
+        /// </summary>
+        [Test]
+        public void GivenFieldInReflection_WhenImProper_FieldName_Should_ReturnException()
+        {
+            try
+            {
+                string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "incorrectfield");
+                Assert.AreEqual(HAPPY, actual);
+            }
+            catch (MoodAnalyzerException e)
+            {
+                Assert.AreEqual(MoodAnalyzerException.ExceptionType.FIELD_NOT_FOUND, e.ExceptionTypes);
             }
         }
     }

@@ -1,12 +1,12 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MoodAnalyzerException.cs" company="BridgeLabz">
-// Copyright (c) 2012 All Rights Reserved
+// Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
-
 namespace MoodAnalyzerExceptions
 {
+    using System;
+
     /// <summary>
     /// /To Throws Custom MoodAnalyzer Exception
     /// </summary>
@@ -51,7 +51,12 @@ namespace MoodAnalyzerExceptions
             /// <summary>
             /// For method not found exception
             /// </summary>
-            METHOD_NOT_FOUND
+            METHOD_NOT_FOUND,
+
+            /// <summary>
+            /// For field not found exception
+            /// </summary>
+            FIELD_NOT_FOUND
         }
     }
 }

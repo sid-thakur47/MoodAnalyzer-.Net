@@ -3,10 +3,10 @@
 // Copyright (c) 2012 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
-
 namespace MoodAnalyzers
 {
+using System;
+
     /// <summary>
     /// main class
     /// </summary>

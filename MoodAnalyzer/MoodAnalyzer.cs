@@ -1,14 +1,12 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MoodAnalyzer.cs" company="BridgeLabz">
-// Copyright (c) 2012 All Rights Reserved
+// Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-
-using System;
-using MoodAnalyzerExceptions;
-
 namespace MoodAnalyzers
 {
+using System;
+using MoodAnalyzerExceptions;
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     /// <summary>
     /// Analyze the mood
@@ -18,7 +16,7 @@ namespace MoodAnalyzers
         /// <summary>
         /// Mood Message
         /// </summary>
-        private string message;
+        public string message;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MoodAnalyzer"/> class
@@ -73,7 +71,7 @@ namespace MoodAnalyzers
             {
                 throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL);
             }
-                    }
+        }
 
         /// <summary>
         /// To check if two objects are equal
