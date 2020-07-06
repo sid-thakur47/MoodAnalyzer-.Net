@@ -3,10 +3,9 @@
 // Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-namespace MoodAnalyzers
+namespace MoodAnalyzer.BridgeLabz
 {
 using System;
-using MoodAnalyzerExceptions;
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     /// <summary>
     /// Analyze the mood
@@ -16,14 +15,14 @@ using MoodAnalyzerExceptions;
         /// <summary>
         /// Mood Message
         /// </summary>
-        public string message;
+        public string Message;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MoodAnalyzer"/> class
         /// </summary>
         public MoodAnalyzer()
         {
-            this.message = string.Empty;
+            this.Message = string.Empty;
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ using MoodAnalyzerExceptions;
         /// <param name="message">Mood of person</param>
         public MoodAnalyzer(string message)
         {
-            this.message = message;
+            this.Message = message;
         }
 
         /// <summary>
@@ -41,7 +40,7 @@ using MoodAnalyzerExceptions;
         /// <returns> analyzed mood</returns>
         public string AnalyzeMood()
         {
-            return this.AnalyzeMood(this.message);
+            return this.AnalyzeMood(this.Message);
         }
 
         /// <summary>
@@ -54,10 +53,12 @@ using MoodAnalyzerExceptions;
             try
             { 
                 if (message.Equals(string.Empty))
-            {
+            {   
+                ////throw exception if message is empty
                 throw new MoodAnalyzerException("Message Cannot be Empty", MoodAnalyzerException.ExceptionType.EMPTY);
             }
 
+                ////return message accoring to mood
             if (message.Contains("sad"))
                 {
                     return "sad";
@@ -69,6 +70,7 @@ using MoodAnalyzerExceptions;
             }
             catch (NullReferenceException)
             {
+                ////throw exception if message is null
                 throw new MoodAnalyzerException("Message Cannot be Null", MoodAnalyzerException.ExceptionType.NULL);
             }
         }
@@ -79,10 +81,10 @@ using MoodAnalyzerExceptions;
         /// <param name="that">Object for equality</param>
         /// <returns>true or false</returns>
         override
-      public bool Equals(object that)
+        public bool Equals(object that)
         {
             MoodAnalyzer moodAnalyser = (MoodAnalyzer)that;
-            if (this.message.Equals(moodAnalyser.message))
+            if (this.Message.Equals(moodAnalyser.Message))
             {
                 return true;
             }

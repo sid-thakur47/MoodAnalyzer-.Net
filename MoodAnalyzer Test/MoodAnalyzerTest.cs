@@ -3,12 +3,9 @@
 // Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-namespace MoodAnalyzerTest
+namespace MoodAnalyzer.BridgeLabz
 {
 using System.Reflection;
-using MoodAnalyzer_Main;
-using MoodAnalyzerExceptions;
-using MoodAnalyzers;
 using NUnit.Framework;
 
     /// <summary>
@@ -123,10 +120,10 @@ using NUnit.Framework;
         }
 
         /// <summary>
-        /// Test Case 4.1:If correct mood should return 
+        /// Test Case 4.1:If correct mood should return object
         /// </summary>object
         [Test]
-        public void Given_ClassName_Whenproper_ShouldthrowException()
+        public void Given_ClassName_Whenproper_ShouldReturnObject()
         {
             try
             {
@@ -229,7 +226,7 @@ using NUnit.Framework;
         [Test]
         public void GivenHappyMessageInReflection_WhenProper_Should_ReturnHappy()
         {
-            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "message");
+            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "Message");
             Assert.AreEqual(HAPPY, actual);
         }
 
@@ -241,7 +238,7 @@ using NUnit.Framework;
         {
             try
             {
-                string actual = this.moodAnalyserFactory.InvokeMood("wrongMethod", "im in happy mood", "message");
+                string actual = this.moodAnalyserFactory.InvokeMood("wrongMethod", "im in happy mood", "Message");
                 Assert.AreEqual(HAPPY, actual);
             }
             catch (MoodAnalyzerException e)
@@ -256,7 +253,7 @@ using NUnit.Framework;
         [Test]
         public void SetHappyMessageInReflection_WhenProper_Should_ReturnHappy()
         {
-            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "message");
+            string actual = this.moodAnalyserFactory.InvokeMood("AnalyzeMood", "im in happy mood", "Message");
             Assert.AreEqual(HAPPY, actual);
         }
 
@@ -276,6 +273,7 @@ using NUnit.Framework;
                 Assert.AreEqual(MoodAnalyzerException.ExceptionType.FIELD_NOT_FOUND, e.ExceptionTypes);
             }
         }
+
         /// <summary>
         /// Test Case 7.3:Incorrect field returns exception
         /// </summary>

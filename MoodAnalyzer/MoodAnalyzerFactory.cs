@@ -3,11 +3,10 @@
 // Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-namespace MoodAnalyzer_Main
+namespace MoodAnalyzer.BridgeLabz
 {
 using System;
 using System.Reflection;
-using MoodAnalyzerExceptions;
 
     /// <summary>
     /// Creating Object of specific Type
@@ -88,7 +87,7 @@ using MoodAnalyzerExceptions;
             {
                 FieldInfo fields = this.type.GetField(field);
                 string value = fields.ToString();
-                if (value.Contains("String message"))
+                if (value.Contains("String Message"))
                 {
                     try
                     {

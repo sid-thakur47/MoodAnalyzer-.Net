@@ -3,7 +3,7 @@
 // Copyright (c) 2020 All Rights Reserved
 // </copyright>
 //-----------------------------------------------------------------------
-namespace MoodAnalyzerExceptions
+namespace MoodAnalyzer.BridgeLabz
 {
     using System;
 
